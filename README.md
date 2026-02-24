@@ -32,3 +32,33 @@ Designed to improve productivity using the Pomodoro Technique.
 ---
 
 ## 📂 Project Structure
+src/
+│
+├── components/
+│ ├── Header.jsx
+│ ├── Timer.jsx
+│ └── Timer.css
+│
+├── App.js
+└── index.js
+
+
+---
+
+## 🧠 How It Works
+
+- Uses `useState` to manage timer state
+- Uses `useEffect` for countdown logic
+- Uses `setInterval` for real-time updates
+- Uses `conic-gradient` for circular progress animation
+- Uses Web Audio API for beep sound generation
+
+---
+
+## 📦 Installation
+
+```bash
+git clone https://github.com/your-username/pomodoro-timer.git
+cd pomodoro-timer
+npm install
+npm start
