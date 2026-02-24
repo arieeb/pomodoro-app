@@ -1,0 +1,19 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Poppins", sans-serif;
+
+  
+    background: url("https://images.unsplash.com/photo-1506784983877-45594efa4cbe") no-repeat center center fixed;
+    background-size: cover;
+  
+}
+
+/* Dark overlay so text is readable */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: -1;
+}

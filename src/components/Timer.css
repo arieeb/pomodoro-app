@@ -1,0 +1,84 @@
+.timer-container {
+  margin: 40px auto;
+  padding: 50px 30px;
+  max-width: 500px;
+  text-align: center;
+
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(4px);
+  border-radius: 25px;
+
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  color: white;
+}
+
+/* ===== Progress Ring ===== */
+.progress-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 30px;
+}
+
+.progress-ring {
+  width: 230px;
+  height: 230px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+
+  transition: background 1s linear; /* smooth animation */
+}
+
+/* Inner Circle */
+.progress-ring::before {
+  content: "";
+  width: 190px;
+  height: 190px;
+  background: rgba(0, 0, 0, 0.85);
+  border-radius: 50%;
+  position: absolute;
+}
+
+/* Timer Text */
+.timer-display {
+  font-size: 3.5rem;
+  font-weight: bold;
+  position: relative;
+  z-index: 1;
+  letter-spacing: 2px;
+}
+
+/* ===== Start Button ===== */
+.start-btn {
+  padding: 15px 45px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  border-radius: 50px;
+  border: none;
+  cursor: pointer;
+
+  background: white;
+  color: black;
+
+  transition: all 0.3s ease;
+}
+
+.start-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 15px rgba(255,255,255,0.6);
+}
+
+/* ===== Session Counter ===== */
+.session-counter {
+  margin-top: 25px;
+  font-size: 1.1rem;
+  opacity: 0.9;
+}
+
+.session-counter span {
+  font-weight: bold;
+  font-size: 1.4rem;
+  color: #ff4e50;
+}
