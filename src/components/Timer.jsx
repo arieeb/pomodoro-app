@@ -40,8 +40,10 @@ const Timer = () => {
     }
 
     if (seconds === 0) {
+      playBeep();
       setIsRunning(false);
       setSessions((prev) => prev + 1);
+      setSeconds(POMODORO_TIME);
     }
     return () => clearInterval(interval);
   }, [isRunning, seconds]);
