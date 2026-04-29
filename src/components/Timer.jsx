@@ -83,9 +83,7 @@ const Timer = () => {
         <button className="start-btn" onClick={handleStartPause}>
           {isRunning ? 'PAUSE' : 'START'}
         </button>
-        <button className="reset-btn" onClick={handleReset}>
-          RESET
-        </button>
+       
       </div>
 
       <div className="session-counter">
