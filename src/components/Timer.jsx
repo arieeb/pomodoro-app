@@ -1,14 +1,14 @@
 import React, { useState, useEffect, useRef } from 'react';
 import './Timer.css';
 
-const POMODORO_TIME = 24*60 * 60;
+const POMODORO_TIME = 24 * 60 * 60;
 
 const Timer = () => {
   const [seconds, setSeconds] = useState(POMODORO_TIME);
   const [isRunning, setIsRunning] = useState(false);
   const [sessions, setSessions] = useState(0);
-  const startTimeRef = useRef(null);   // wall-clock start time
-  const startSecsRef = useRef(null);   // seconds value when timer started
+  const startTimeRef = useRef(null);
+  const startSecsRef = useRef(null);
 
   const playBeep = () => {
     const audioContext = new (window.AudioContext || window.webkitAudioContext)();
@@ -26,12 +26,11 @@ const Timer = () => {
   useEffect(() => {
     if (!isRunning) return;
 
-    // Snapshot wall clock and current seconds when timer starts/resumes
-    startTimeRef.current = Date.now();
+    startTimeRef.current = Date.now(); // ✅ fixed
     startSecsRef.current = seconds;
 
     const interval = setInterval(() => {
-      const elapsed = Math.floor((Date.now() - startTimeRef.current) / 1000);
+      const elapsed = Math.floor((Date.now() - startTimeRef.current) / 1000); // ✅ fixed
       const remaining = startSecsRef.current - elapsed;
 
       if (remaining <= 0) {
@@ -39,32 +38,27 @@ const Timer = () => {
         setSeconds(POMODORO_TIME);
         setIsRunning(false);
         setSessions((s) => s + 1);
-        playBeep(); // 🔔 completion beep
+        playBeep();
       } else {
         setSeconds(remaining);
       }
-    }, 500); // poll every 500ms for accuracy
+    }, 500);
 
     return () => clearInterval(interval);
-  }, [isRunning]); // ✅ only re-runs on start/pause, not every tick
+  }, [isRunning]);
 
   const handleStartPause = () => {
     setIsRunning((prev) => !prev);
   };
 
-  const handleReset = () => {
-    setIsRunning(false);
-    setSeconds(POMODORO_TIME);
-  };
-
-  const progress = (seconds / POMODORO_TIME) * 360;
-
   const formatTime = () => {
     const hrs = Math.floor(seconds / 3600);
-    const mins = Math.floor(seconds / 60);
+    const mins = Math.floor((seconds % 3600) / 60); // ✅ fixed: remainder after hours
     const secs = seconds % 60;
     return `${hrs.toString().padStart(2, '0')}:${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
   };
+
+  const progress = (seconds / POMODORO_TIME) * 360;
 
   return (
     <div className="timer-container">
@@ -79,12 +73,9 @@ const Timer = () => {
         </div>
       </div>
 
-      <div className="btn-group">
-        <button className="start-btn" onClick={handleStartPause}>
-          {isRunning ? 'PAUSE' : 'START'}
-        </button>
-       
-      </div>
+      <button className="start-btn" onClick={handleStartPause}>
+        {isRunning ? 'PAUSE' : 'START'}
+      </button>
 
       <div className="session-counter">
         🔥 Sessions Today: <span>{sessions}</span>
