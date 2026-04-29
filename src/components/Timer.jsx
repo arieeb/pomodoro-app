@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import './Timer.css';
 
-const POMODORO_TIME = 25 * 60;
+const POMODORO_TIME = 24*60 * 60;
 
 const Timer = () => {
   const [seconds, setSeconds] = useState(POMODORO_TIME);
@@ -60,9 +60,10 @@ const Timer = () => {
   const progress = (seconds / POMODORO_TIME) * 360;
 
   const formatTime = () => {
+    const hrs = Math.floor(seconds / 3600);
     const mins = Math.floor(seconds / 60);
     const secs = seconds % 60;
-    return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+    return `${hrs.toString().padStart(2, '0')}:${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
   };
 
   return (
